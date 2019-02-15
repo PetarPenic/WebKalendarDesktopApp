@@ -1,0 +1,939 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="WebKalendarModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Citanja">
+          <Key>
+            <PropertyRef Name="IdCitanja" />
+          </Key>
+          <Property Name="IdCitanja" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Opis" Type="nvarchar" MaxLength="50" />
+          <Property Name="VrstaSlavlja" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Dan">
+          <Key>
+            <PropertyRef Name="Datum" />
+          </Key>
+          <Property Name="Datum" Type="date" Nullable="false" />
+          <Property Name="Dan_u_tjednu" Type="nchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Dan_Vrijeme">
+          <Key>
+            <PropertyRef Name="Datum" />
+            <PropertyRef Name="IdVrijemeSlavlja" />
+          </Key>
+          <Property Name="Datum" Type="date" Nullable="false" />
+          <Property Name="IdVrijemeSlavlja" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Jezik">
+          <Key>
+            <PropertyRef Name="IdJezik" />
+          </Key>
+          <Property Name="IdJezik" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Liturgijska_boja">
+          <Key>
+            <PropertyRef Name="IdLiturgijskaBoja" />
+          </Key>
+          <Property Name="IdLiturgijskaBoja" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Opis" Type="nvarchar" MaxLength="50" />
+          <Property Name="ColorString" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Misa">
+          <Key>
+            <PropertyRef Name="IdMisa" />
+          </Key>
+          <Property Name="IdMisa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nchar" MaxLength="20" />
+          <Property Name="Opis" Type="nvarchar(max)" />
+          <Property Name="IdRazinaSlavlja" Type="int" />
+          <Property Name="IdVrstaSlavlja" Type="int" />
+          <Property Name="IdLiturgijskaBoja" Type="int" />
+          <Property Name="IdVrijemeSlavlja" Type="int" />
+          <Property Name="IdCitanja" Type="int" />
+          <Property Name="IdNepromjenjivi" Type="int" />
+          <Property Name="IdPropriji" Type="int" />
+        </EntityType>
+        <EntityType Name="Nepromjenjivi">
+          <Key>
+            <PropertyRef Name="IdNepromjenjivi" />
+          </Key>
+          <Property Name="IdNepromjenjivi" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Opis" Type="nvarchar" MaxLength="50" />
+          <Property Name="VrstaSlavlja" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Propriji">
+          <Key>
+            <PropertyRef Name="IdPropriji" />
+          </Key>
+          <Property Name="IdPropriji" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Opis" Type="nvarchar" MaxLength="50" />
+          <Property Name="VrstaSlavlja" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Razina_slavlja">
+          <Key>
+            <PropertyRef Name="IdRazinaSlavlja" />
+          </Key>
+          <Property Name="IdRazinaSlavlja" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Opis" Type="nvarchar" MaxLength="50" />
+          <Property Name="Vrijednost" Type="int" />
+        </EntityType>
+        <EntityType Name="Tekst">
+          <Key>
+            <PropertyRef Name="IdTekst" />
+          </Key>
+          <Property Name="IdTekst" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Referenca" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sadrzaj" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IdJezik" Type="int" Nullable="false" />
+          <Property Name="IdVrstaTeksta" Type="int" />
+        </EntityType>
+        <EntityType Name="Tekst_Citanja">
+          <Key>
+            <PropertyRef Name="IdCitanja" />
+            <PropertyRef Name="IdTekst" />
+          </Key>
+          <Property Name="IdCitanja" Type="int" Nullable="false" />
+          <Property Name="IdTekst" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tekst_Nepromjenjivi">
+          <Key>
+            <PropertyRef Name="IdNepromjenjivi" />
+            <PropertyRef Name="IdTekst" />
+          </Key>
+          <Property Name="IdNepromjenjivi" Type="int" Nullable="false" />
+          <Property Name="IdTekst" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tekst_Propriji">
+          <Key>
+            <PropertyRef Name="IdPropriji" />
+            <PropertyRef Name="IdTekst" />
+          </Key>
+          <Property Name="IdPropriji" Type="int" Nullable="false" />
+          <Property Name="IdTekst" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vrijeme_slavlja">
+          <Key>
+            <PropertyRef Name="IdVrijemeSlavlja" />
+          </Key>
+          <Property Name="IdVrijemeSlavlja" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Datum" Type="date" />
+          <Property Name="Opis" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Vrsta_slavlja">
+          <Key>
+            <PropertyRef Name="IdVrstaSlavlja" />
+          </Key>
+          <Property Name="IdVrstaSlavlja" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Opis" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Vrsta_teksta">
+          <Key>
+            <PropertyRef Name="IdVrstaTeksta" />
+          </Key>
+          <Property Name="IdVrstaTeksta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Opis" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_Dan_vrijeme_Dan">
+          <End Role="Dan" Type="Self.Dan" Multiplicity="1" />
+          <End Role="Dan_Vrijeme" Type="Self.Dan_Vrijeme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dan">
+              <PropertyRef Name="Datum" />
+            </Principal>
+            <Dependent Role="Dan_Vrijeme">
+              <PropertyRef Name="Datum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dan_vrijeme_Vrijeme_slavlja">
+          <End Role="Vrijeme_slavlja" Type="Self.Vrijeme_slavlja" Multiplicity="1" />
+          <End Role="Dan_Vrijeme" Type="Self.Dan_Vrijeme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vrijeme_slavlja">
+              <PropertyRef Name="IdVrijemeSlavlja" />
+            </Principal>
+            <Dependent Role="Dan_Vrijeme">
+              <PropertyRef Name="IdVrijemeSlavlja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Misa_Citanja">
+          <End Role="Citanja" Type="Self.Citanja" Multiplicity="0..1" />
+          <End Role="Misa" Type="Self.Misa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Citanja">
+              <PropertyRef Name="IdCitanja" />
+            </Principal>
+            <Dependent Role="Misa">
+              <PropertyRef Name="IdCitanja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Misa_Liturgijska_boja">
+          <End Role="Liturgijska_boja" Type="Self.Liturgijska_boja" Multiplicity="0..1" />
+          <End Role="Misa" Type="Self.Misa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Liturgijska_boja">
+              <PropertyRef Name="IdLiturgijskaBoja" />
+            </Principal>
+            <Dependent Role="Misa">
+              <PropertyRef Name="IdLiturgijskaBoja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Misa_Nepromjenjivi">
+          <End Role="Nepromjenjivi" Type="Self.Nepromjenjivi" Multiplicity="0..1" />
+          <End Role="Misa" Type="Self.Misa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nepromjenjivi">
+              <PropertyRef Name="IdNepromjenjivi" />
+            </Principal>
+            <Dependent Role="Misa">
+              <PropertyRef Name="IdNepromjenjivi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Misa_Propriji">
+          <End Role="Propriji" Type="Self.Propriji" Multiplicity="0..1" />
+          <End Role="Misa" Type="Self.Misa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Propriji">
+              <PropertyRef Name="IdPropriji" />
+            </Principal>
+            <Dependent Role="Misa">
+              <PropertyRef Name="IdPropriji" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Misa_Razina_slavlja">
+          <End Role="Razina_slavlja" Type="Self.Razina_slavlja" Multiplicity="0..1" />
+          <End Role="Misa" Type="Self.Misa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Razina_slavlja">
+              <PropertyRef Name="IdRazinaSlavlja" />
+            </Principal>
+            <Dependent Role="Misa">
+              <PropertyRef Name="IdRazinaSlavlja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Misa_Vrijeme_slavlja">
+          <End Role="Vrijeme_slavlja" Type="Self.Vrijeme_slavlja" Multiplicity="0..1" />
+          <End Role="Misa" Type="Self.Misa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vrijeme_slavlja">
+              <PropertyRef Name="IdVrijemeSlavlja" />
+            </Principal>
+            <Dependent Role="Misa">
+              <PropertyRef Name="IdVrijemeSlavlja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Misa_Vrsta_slavlja">
+          <End Role="Vrsta_slavlja" Type="Self.Vrsta_slavlja" Multiplicity="0..1" />
+          <End Role="Misa" Type="Self.Misa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vrsta_slavlja">
+              <PropertyRef Name="IdVrstaSlavlja" />
+            </Principal>
+            <Dependent Role="Misa">
+              <PropertyRef Name="IdVrstaSlavlja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tekst_Citanja_Citanja">
+          <End Role="Citanja" Type="Self.Citanja" Multiplicity="1" />
+          <End Role="Tekst_Citanja" Type="Self.Tekst_Citanja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Citanja">
+              <PropertyRef Name="IdCitanja" />
+            </Principal>
+            <Dependent Role="Tekst_Citanja">
+              <PropertyRef Name="IdCitanja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tekst_Citanja_Tekst">
+          <End Role="Tekst" Type="Self.Tekst" Multiplicity="1" />
+          <End Role="Tekst_Citanja" Type="Self.Tekst_Citanja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tekst">
+              <PropertyRef Name="IdTekst" />
+            </Principal>
+            <Dependent Role="Tekst_Citanja">
+              <PropertyRef Name="IdTekst" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tekst_Jezik">
+          <End Role="Jezik" Type="Self.Jezik" Multiplicity="1" />
+          <End Role="Tekst" Type="Self.Tekst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jezik">
+              <PropertyRef Name="IdJezik" />
+            </Principal>
+            <Dependent Role="Tekst">
+              <PropertyRef Name="IdJezik" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tekst_Nepromjenjivi_Nepromjenjivi">
+          <End Role="Nepromjenjivi" Type="Self.Nepromjenjivi" Multiplicity="1" />
+          <End Role="Tekst_Nepromjenjivi" Type="Self.Tekst_Nepromjenjivi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nepromjenjivi">
+              <PropertyRef Name="IdNepromjenjivi" />
+            </Principal>
+            <Dependent Role="Tekst_Nepromjenjivi">
+              <PropertyRef Name="IdNepromjenjivi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tekst_Nepromjenjivi_Tekst">
+          <End Role="Tekst" Type="Self.Tekst" Multiplicity="1" />
+          <End Role="Tekst_Nepromjenjivi" Type="Self.Tekst_Nepromjenjivi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tekst">
+              <PropertyRef Name="IdTekst" />
+            </Principal>
+            <Dependent Role="Tekst_Nepromjenjivi">
+              <PropertyRef Name="IdTekst" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tekst_Propriji_Propriji">
+          <End Role="Propriji" Type="Self.Propriji" Multiplicity="1" />
+          <End Role="Tekst_Propriji" Type="Self.Tekst_Propriji" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Propriji">
+              <PropertyRef Name="IdPropriji" />
+            </Principal>
+            <Dependent Role="Tekst_Propriji">
+              <PropertyRef Name="IdPropriji" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tekst_Propriji_Tekst">
+          <End Role="Tekst" Type="Self.Tekst" Multiplicity="1" />
+          <End Role="Tekst_Propriji" Type="Self.Tekst_Propriji" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tekst">
+              <PropertyRef Name="IdTekst" />
+            </Principal>
+            <Dependent Role="Tekst_Propriji">
+              <PropertyRef Name="IdTekst" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tekst_Vrsta_teksta">
+          <End Role="Vrsta_teksta" Type="Self.Vrsta_teksta" Multiplicity="0..1" />
+          <End Role="Tekst" Type="Self.Tekst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vrsta_teksta">
+              <PropertyRef Name="IdVrstaTeksta" />
+            </Principal>
+            <Dependent Role="Tekst">
+              <PropertyRef Name="IdVrstaTeksta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WebKalendarModelStoreContainer">
+          <EntitySet Name="Citanja" EntityType="Self.Citanja" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dan" EntityType="Self.Dan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dan_Vrijeme" EntityType="Self.Dan_Vrijeme" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Jezik" EntityType="Self.Jezik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Liturgijska_boja" EntityType="Self.Liturgijska_boja" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Misa" EntityType="Self.Misa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Nepromjenjivi" EntityType="Self.Nepromjenjivi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Propriji" EntityType="Self.Propriji" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Razina_slavlja" EntityType="Self.Razina_slavlja" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tekst" EntityType="Self.Tekst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tekst_Citanja" EntityType="Self.Tekst_Citanja" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tekst_Nepromjenjivi" EntityType="Self.Tekst_Nepromjenjivi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tekst_Propriji" EntityType="Self.Tekst_Propriji" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vrijeme_slavlja" EntityType="Self.Vrijeme_slavlja" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vrsta_slavlja" EntityType="Self.Vrsta_slavlja" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vrsta_teksta" EntityType="Self.Vrsta_teksta" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Dan_vrijeme_Dan" Association="Self.FK_Dan_vrijeme_Dan">
+            <End Role="Dan" EntitySet="Dan" />
+            <End Role="Dan_Vrijeme" EntitySet="Dan_Vrijeme" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dan_vrijeme_Vrijeme_slavlja" Association="Self.FK_Dan_vrijeme_Vrijeme_slavlja">
+            <End Role="Vrijeme_slavlja" EntitySet="Vrijeme_slavlja" />
+            <End Role="Dan_Vrijeme" EntitySet="Dan_Vrijeme" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Misa_Citanja" Association="Self.FK_Misa_Citanja">
+            <End Role="Citanja" EntitySet="Citanja" />
+            <End Role="Misa" EntitySet="Misa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Misa_Liturgijska_boja" Association="Self.FK_Misa_Liturgijska_boja">
+            <End Role="Liturgijska_boja" EntitySet="Liturgijska_boja" />
+            <End Role="Misa" EntitySet="Misa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Misa_Nepromjenjivi" Association="Self.FK_Misa_Nepromjenjivi">
+            <End Role="Nepromjenjivi" EntitySet="Nepromjenjivi" />
+            <End Role="Misa" EntitySet="Misa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Misa_Propriji" Association="Self.FK_Misa_Propriji">
+            <End Role="Propriji" EntitySet="Propriji" />
+            <End Role="Misa" EntitySet="Misa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Misa_Razina_slavlja" Association="Self.FK_Misa_Razina_slavlja">
+            <End Role="Razina_slavlja" EntitySet="Razina_slavlja" />
+            <End Role="Misa" EntitySet="Misa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Misa_Vrijeme_slavlja" Association="Self.FK_Misa_Vrijeme_slavlja">
+            <End Role="Vrijeme_slavlja" EntitySet="Vrijeme_slavlja" />
+            <End Role="Misa" EntitySet="Misa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Misa_Vrsta_slavlja" Association="Self.FK_Misa_Vrsta_slavlja">
+            <End Role="Vrsta_slavlja" EntitySet="Vrsta_slavlja" />
+            <End Role="Misa" EntitySet="Misa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tekst_Citanja_Citanja" Association="Self.FK_Tekst_Citanja_Citanja">
+            <End Role="Citanja" EntitySet="Citanja" />
+            <End Role="Tekst_Citanja" EntitySet="Tekst_Citanja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tekst_Citanja_Tekst" Association="Self.FK_Tekst_Citanja_Tekst">
+            <End Role="Tekst" EntitySet="Tekst" />
+            <End Role="Tekst_Citanja" EntitySet="Tekst_Citanja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tekst_Jezik" Association="Self.FK_Tekst_Jezik">
+            <End Role="Jezik" EntitySet="Jezik" />
+            <End Role="Tekst" EntitySet="Tekst" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tekst_Nepromjenjivi_Nepromjenjivi" Association="Self.FK_Tekst_Nepromjenjivi_Nepromjenjivi">
+            <End Role="Nepromjenjivi" EntitySet="Nepromjenjivi" />
+            <End Role="Tekst_Nepromjenjivi" EntitySet="Tekst_Nepromjenjivi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tekst_Nepromjenjivi_Tekst" Association="Self.FK_Tekst_Nepromjenjivi_Tekst">
+            <End Role="Tekst" EntitySet="Tekst" />
+            <End Role="Tekst_Nepromjenjivi" EntitySet="Tekst_Nepromjenjivi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tekst_Propriji_Propriji" Association="Self.FK_Tekst_Propriji_Propriji">
+            <End Role="Propriji" EntitySet="Propriji" />
+            <End Role="Tekst_Propriji" EntitySet="Tekst_Propriji" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tekst_Propriji_Tekst" Association="Self.FK_Tekst_Propriji_Tekst">
+            <End Role="Tekst" EntitySet="Tekst" />
+            <End Role="Tekst_Propriji" EntitySet="Tekst_Propriji" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tekst_Vrsta_teksta" Association="Self.FK_Tekst_Vrsta_teksta">
+            <End Role="Vrsta_teksta" EntitySet="Vrsta_teksta" />
+            <End Role="Tekst" EntitySet="Tekst" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WebKalendarModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Citanja">
+          <Key>
+            <PropertyRef Name="IdCitanja" />
+          </Key>
+          <Property Name="IdCitanja" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Opis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VrstaSlavlja" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Misa" Relationship="Self.FK_Misa_Citanja" FromRole="Citanja" ToRole="Misa" />
+          <NavigationProperty Name="Tekst" Relationship="Self.Tekst_Citanja" FromRole="Citanja" ToRole="Tekst" />
+        </EntityType>
+        <EntityType Name="Dan">
+          <Key>
+            <PropertyRef Name="Datum" />
+          </Key>
+          <Property Name="Datum" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Dan_u_tjednu" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Vrijeme_slavlja" Relationship="Self.Dan_Vrijeme" FromRole="Dan" ToRole="Vrijeme_slavlja" />
+        </EntityType>
+        <EntityType Name="Jezik">
+          <Key>
+            <PropertyRef Name="IdJezik" />
+          </Key>
+          <Property Name="IdJezik" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tekst" Relationship="Self.FK_Tekst_Jezik" FromRole="Jezik" ToRole="Tekst" />
+        </EntityType>
+        <EntityType Name="Liturgijska_boja">
+          <Key>
+            <PropertyRef Name="IdLiturgijskaBoja" />
+          </Key>
+          <Property Name="IdLiturgijskaBoja" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Opis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ColorString" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Misa" Relationship="Self.FK_Misa_Liturgijska_boja" FromRole="Liturgijska_boja" ToRole="Misa" />
+        </EntityType>
+        <EntityType Name="Misa">
+          <Key>
+            <PropertyRef Name="IdMisa" />
+          </Key>
+          <Property Name="IdMisa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Opis" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IdRazinaSlavlja" Type="Int32" />
+          <Property Name="IdVrstaSlavlja" Type="Int32" />
+          <Property Name="IdLiturgijskaBoja" Type="Int32" />
+          <Property Name="IdVrijemeSlavlja" Type="Int32" />
+          <Property Name="IdCitanja" Type="Int32" />
+          <Property Name="IdNepromjenjivi" Type="Int32" />
+          <Property Name="IdPropriji" Type="Int32" />
+          <NavigationProperty Name="Citanja" Relationship="Self.FK_Misa_Citanja" FromRole="Misa" ToRole="Citanja" />
+          <NavigationProperty Name="Liturgijska_boja" Relationship="Self.FK_Misa_Liturgijska_boja" FromRole="Misa" ToRole="Liturgijska_boja" />
+          <NavigationProperty Name="Nepromjenjivi" Relationship="Self.FK_Misa_Nepromjenjivi" FromRole="Misa" ToRole="Nepromjenjivi" />
+          <NavigationProperty Name="Propriji" Relationship="Self.FK_Misa_Propriji" FromRole="Misa" ToRole="Propriji" />
+          <NavigationProperty Name="Razina_slavlja" Relationship="Self.FK_Misa_Razina_slavlja" FromRole="Misa" ToRole="Razina_slavlja" />
+          <NavigationProperty Name="Vrijeme_slavlja" Relationship="Self.FK_Misa_Vrijeme_slavlja" FromRole="Misa" ToRole="Vrijeme_slavlja" />
+          <NavigationProperty Name="Vrsta_slavlja" Relationship="Self.FK_Misa_Vrsta_slavlja" FromRole="Misa" ToRole="Vrsta_slavlja" />
+        </EntityType>
+        <EntityType Name="Nepromjenjivi">
+          <Key>
+            <PropertyRef Name="IdNepromjenjivi" />
+          </Key>
+          <Property Name="IdNepromjenjivi" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Opis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VrstaSlavlja" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Misa" Relationship="Self.FK_Misa_Nepromjenjivi" FromRole="Nepromjenjivi" ToRole="Misa" />
+          <NavigationProperty Name="Tekst" Relationship="Self.Tekst_Nepromjenjivi" FromRole="Nepromjenjivi" ToRole="Tekst" />
+        </EntityType>
+        <EntityType Name="Propriji">
+          <Key>
+            <PropertyRef Name="IdPropriji" />
+          </Key>
+          <Property Name="IdPropriji" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Opis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VrstaSlavlja" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Misa" Relationship="Self.FK_Misa_Propriji" FromRole="Propriji" ToRole="Misa" />
+          <NavigationProperty Name="Tekst" Relationship="Self.Tekst_Propriji" FromRole="Propriji" ToRole="Tekst" />
+        </EntityType>
+        <EntityType Name="Razina_slavlja">
+          <Key>
+            <PropertyRef Name="IdRazinaSlavlja" />
+          </Key>
+          <Property Name="IdRazinaSlavlja" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Opis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Vrijednost" Type="Int32" />
+          <NavigationProperty Name="Misa" Relationship="Self.FK_Misa_Razina_slavlja" FromRole="Razina_slavlja" ToRole="Misa" />
+        </EntityType>
+        <EntityType Name="Tekst">
+          <Key>
+            <PropertyRef Name="IdTekst" />
+          </Key>
+          <Property Name="IdTekst" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Referenca" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sadrzaj" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdJezik" Type="Int32" Nullable="false" />
+          <Property Name="IdVrstaTeksta" Type="Int32" />
+          <NavigationProperty Name="Jezik" Relationship="Self.FK_Tekst_Jezik" FromRole="Tekst" ToRole="Jezik" />
+          <NavigationProperty Name="Vrsta_teksta" Relationship="Self.FK_Tekst_Vrsta_teksta" FromRole="Tekst" ToRole="Vrsta_teksta" />
+          <NavigationProperty Name="Citanja" Relationship="Self.Tekst_Citanja" FromRole="Tekst" ToRole="Citanja" />
+          <NavigationProperty Name="Nepromjenjivi" Relationship="Self.Tekst_Nepromjenjivi" FromRole="Tekst" ToRole="Nepromjenjivi" />
+          <NavigationProperty Name="Propriji" Relationship="Self.Tekst_Propriji" FromRole="Tekst" ToRole="Propriji" />
+        </EntityType>
+        <EntityType Name="Vrijeme_slavlja">
+          <Key>
+            <PropertyRef Name="IdVrijemeSlavlja" />
+          </Key>
+          <Property Name="IdVrijemeSlavlja" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Datum" Type="DateTime" Precision="0" />
+          <Property Name="Opis" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Misa" Relationship="Self.FK_Misa_Vrijeme_slavlja" FromRole="Vrijeme_slavlja" ToRole="Misa" />
+          <NavigationProperty Name="Dan" Relationship="Self.Dan_Vrijeme" FromRole="Vrijeme_slavlja" ToRole="Dan" />
+        </EntityType>
+        <EntityType Name="Vrsta_slavlja">
+          <Key>
+            <PropertyRef Name="IdVrstaSlavlja" />
+          </Key>
+          <Property Name="IdVrstaSlavlja" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Opis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Misa" Relationship="Self.FK_Misa_Vrsta_slavlja" FromRole="Vrsta_slavlja" ToRole="Misa" />
+        </EntityType>
+        <EntityType Name="Vrsta_teksta">
+          <Key>
+            <PropertyRef Name="IdVrstaTeksta" />
+          </Key>
+          <Property Name="IdVrstaTeksta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Opis" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tekst" Relationship="Self.FK_Tekst_Vrsta_teksta" FromRole="Vrsta_teksta" ToRole="Tekst" />
+        </EntityType>
+        <Association Name="FK_Misa_Citanja">
+          <End Role="Citanja" Type="Self.Citanja" Multiplicity="0..1" />
+          <End Role="Misa" Type="Self.Misa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Citanja">
+              <PropertyRef Name="IdCitanja" />
+            </Principal>
+            <Dependent Role="Misa">
+              <PropertyRef Name="IdCitanja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tekst_Jezik">
+          <End Role="Jezik" Type="Self.Jezik" Multiplicity="1" />
+          <End Role="Tekst" Type="Self.Tekst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jezik">
+              <PropertyRef Name="IdJezik" />
+            </Principal>
+            <Dependent Role="Tekst">
+              <PropertyRef Name="IdJezik" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Misa_Liturgijska_boja">
+          <End Role="Liturgijska_boja" Type="Self.Liturgijska_boja" Multiplicity="0..1" />
+          <End Role="Misa" Type="Self.Misa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Liturgijska_boja">
+              <PropertyRef Name="IdLiturgijskaBoja" />
+            </Principal>
+            <Dependent Role="Misa">
+              <PropertyRef Name="IdLiturgijskaBoja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Misa_Nepromjenjivi">
+          <End Role="Nepromjenjivi" Type="Self.Nepromjenjivi" Multiplicity="0..1" />
+          <End Role="Misa" Type="Self.Misa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nepromjenjivi">
+              <PropertyRef Name="IdNepromjenjivi" />
+            </Principal>
+            <Dependent Role="Misa">
+              <PropertyRef Name="IdNepromjenjivi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Misa_Propriji">
+          <End Role="Propriji" Type="Self.Propriji" Multiplicity="0..1" />
+          <End Role="Misa" Type="Self.Misa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Propriji">
+              <PropertyRef Name="IdPropriji" />
+            </Principal>
+            <Dependent Role="Misa">
+              <PropertyRef Name="IdPropriji" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Misa_Razina_slavlja">
+          <End Role="Razina_slavlja" Type="Self.Razina_slavlja" Multiplicity="0..1" />
+          <End Role="Misa" Type="Self.Misa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Razina_slavlja">
+              <PropertyRef Name="IdRazinaSlavlja" />
+            </Principal>
+            <Dependent Role="Misa">
+              <PropertyRef Name="IdRazinaSlavlja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Misa_Vrijeme_slavlja">
+          <End Role="Vrijeme_slavlja" Type="Self.Vrijeme_slavlja" Multiplicity="0..1" />
+          <End Role="Misa" Type="Self.Misa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vrijeme_slavlja">
+              <PropertyRef Name="IdVrijemeSlavlja" />
+            </Principal>
+            <Dependent Role="Misa">
+              <PropertyRef Name="IdVrijemeSlavlja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Misa_Vrsta_slavlja">
+          <End Role="Vrsta_slavlja" Type="Self.Vrsta_slavlja" Multiplicity="0..1" />
+          <End Role="Misa" Type="Self.Misa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vrsta_slavlja">
+              <PropertyRef Name="IdVrstaSlavlja" />
+            </Principal>
+            <Dependent Role="Misa">
+              <PropertyRef Name="IdVrstaSlavlja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tekst_Vrsta_teksta">
+          <End Role="Vrsta_teksta" Type="Self.Vrsta_teksta" Multiplicity="0..1" />
+          <End Role="Tekst" Type="Self.Tekst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vrsta_teksta">
+              <PropertyRef Name="IdVrstaTeksta" />
+            </Principal>
+            <Dependent Role="Tekst">
+              <PropertyRef Name="IdVrstaTeksta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Dan_Vrijeme">
+          <End Role="Dan" Type="Self.Dan" Multiplicity="*" />
+          <End Role="Vrijeme_slavlja" Type="Self.Vrijeme_slavlja" Multiplicity="*" />
+        </Association>
+        <Association Name="Tekst_Citanja">
+          <End Role="Citanja" Type="Self.Citanja" Multiplicity="*" />
+          <End Role="Tekst" Type="Self.Tekst" Multiplicity="*" />
+        </Association>
+        <Association Name="Tekst_Nepromjenjivi">
+          <End Role="Nepromjenjivi" Type="Self.Nepromjenjivi" Multiplicity="*" />
+          <End Role="Tekst" Type="Self.Tekst" Multiplicity="*" />
+        </Association>
+        <Association Name="Tekst_Propriji">
+          <End Role="Propriji" Type="Self.Propriji" Multiplicity="*" />
+          <End Role="Tekst" Type="Self.Tekst" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="WebKalendarEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Citanja" EntityType="Self.Citanja" />
+          <EntitySet Name="Dan" EntityType="Self.Dan" />
+          <EntitySet Name="Jezik" EntityType="Self.Jezik" />
+          <EntitySet Name="Liturgijska_boja" EntityType="Self.Liturgijska_boja" />
+          <EntitySet Name="Misa" EntityType="Self.Misa" />
+          <EntitySet Name="Nepromjenjivi" EntityType="Self.Nepromjenjivi" />
+          <EntitySet Name="Propriji" EntityType="Self.Propriji" />
+          <EntitySet Name="Razina_slavlja" EntityType="Self.Razina_slavlja" />
+          <EntitySet Name="Tekst" EntityType="Self.Tekst" />
+          <EntitySet Name="Vrijeme_slavlja" EntityType="Self.Vrijeme_slavlja" />
+          <EntitySet Name="Vrsta_slavlja" EntityType="Self.Vrsta_slavlja" />
+          <EntitySet Name="Vrsta_teksta" EntityType="Self.Vrsta_teksta" />
+          <AssociationSet Name="FK_Misa_Citanja" Association="Self.FK_Misa_Citanja">
+            <End Role="Citanja" EntitySet="Citanja" />
+            <End Role="Misa" EntitySet="Misa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tekst_Jezik" Association="Self.FK_Tekst_Jezik">
+            <End Role="Jezik" EntitySet="Jezik" />
+            <End Role="Tekst" EntitySet="Tekst" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Misa_Liturgijska_boja" Association="Self.FK_Misa_Liturgijska_boja">
+            <End Role="Liturgijska_boja" EntitySet="Liturgijska_boja" />
+            <End Role="Misa" EntitySet="Misa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Misa_Nepromjenjivi" Association="Self.FK_Misa_Nepromjenjivi">
+            <End Role="Nepromjenjivi" EntitySet="Nepromjenjivi" />
+            <End Role="Misa" EntitySet="Misa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Misa_Propriji" Association="Self.FK_Misa_Propriji">
+            <End Role="Propriji" EntitySet="Propriji" />
+            <End Role="Misa" EntitySet="Misa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Misa_Razina_slavlja" Association="Self.FK_Misa_Razina_slavlja">
+            <End Role="Razina_slavlja" EntitySet="Razina_slavlja" />
+            <End Role="Misa" EntitySet="Misa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Misa_Vrijeme_slavlja" Association="Self.FK_Misa_Vrijeme_slavlja">
+            <End Role="Vrijeme_slavlja" EntitySet="Vrijeme_slavlja" />
+            <End Role="Misa" EntitySet="Misa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Misa_Vrsta_slavlja" Association="Self.FK_Misa_Vrsta_slavlja">
+            <End Role="Vrsta_slavlja" EntitySet="Vrsta_slavlja" />
+            <End Role="Misa" EntitySet="Misa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tekst_Vrsta_teksta" Association="Self.FK_Tekst_Vrsta_teksta">
+            <End Role="Vrsta_teksta" EntitySet="Vrsta_teksta" />
+            <End Role="Tekst" EntitySet="Tekst" />
+          </AssociationSet>
+          <AssociationSet Name="Dan_Vrijeme" Association="Self.Dan_Vrijeme">
+            <End Role="Dan" EntitySet="Dan" />
+            <End Role="Vrijeme_slavlja" EntitySet="Vrijeme_slavlja" />
+          </AssociationSet>
+          <AssociationSet Name="Tekst_Citanja" Association="Self.Tekst_Citanja">
+            <End Role="Citanja" EntitySet="Citanja" />
+            <End Role="Tekst" EntitySet="Tekst" />
+          </AssociationSet>
+          <AssociationSet Name="Tekst_Nepromjenjivi" Association="Self.Tekst_Nepromjenjivi">
+            <End Role="Nepromjenjivi" EntitySet="Nepromjenjivi" />
+            <End Role="Tekst" EntitySet="Tekst" />
+          </AssociationSet>
+          <AssociationSet Name="Tekst_Propriji" Association="Self.Tekst_Propriji">
+            <End Role="Propriji" EntitySet="Propriji" />
+            <End Role="Tekst" EntitySet="Tekst" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WebKalendarModelStoreContainer" CdmEntityContainer="WebKalendarEntities">
+          <EntitySetMapping Name="Citanja">
+            <EntityTypeMapping TypeName="WebKalendarModel.Citanja">
+              <MappingFragment StoreEntitySet="Citanja">
+                <ScalarProperty Name="IdCitanja" ColumnName="IdCitanja" />
+                <ScalarProperty Name="Opis" ColumnName="Opis" />
+                <ScalarProperty Name="VrstaSlavlja" ColumnName="VrstaSlavlja" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dan">
+            <EntityTypeMapping TypeName="WebKalendarModel.Dan">
+              <MappingFragment StoreEntitySet="Dan">
+                <ScalarProperty Name="Datum" ColumnName="Datum" />
+                <ScalarProperty Name="Dan_u_tjednu" ColumnName="Dan_u_tjednu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jezik">
+            <EntityTypeMapping TypeName="WebKalendarModel.Jezik">
+              <MappingFragment StoreEntitySet="Jezik">
+                <ScalarProperty Name="IdJezik" ColumnName="IdJezik" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Liturgijska_boja">
+            <EntityTypeMapping TypeName="WebKalendarModel.Liturgijska_boja">
+              <MappingFragment StoreEntitySet="Liturgijska_boja">
+                <ScalarProperty Name="IdLiturgijskaBoja" ColumnName="IdLiturgijskaBoja" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Opis" ColumnName="Opis" />
+                <ScalarProperty Name="ColorString" ColumnName="ColorString" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Misa">
+            <EntityTypeMapping TypeName="WebKalendarModel.Misa">
+              <MappingFragment StoreEntitySet="Misa">
+                <ScalarProperty Name="IdMisa" ColumnName="IdMisa" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Opis" ColumnName="Opis" />
+                <ScalarProperty Name="IdRazinaSlavlja" ColumnName="IdRazinaSlavlja" />
+                <ScalarProperty Name="IdVrstaSlavlja" ColumnName="IdVrstaSlavlja" />
+                <ScalarProperty Name="IdLiturgijskaBoja" ColumnName="IdLiturgijskaBoja" />
+                <ScalarProperty Name="IdVrijemeSlavlja" ColumnName="IdVrijemeSlavlja" />
+                <ScalarProperty Name="IdCitanja" ColumnName="IdCitanja" />
+                <ScalarProperty Name="IdNepromjenjivi" ColumnName="IdNepromjenjivi" />
+                <ScalarProperty Name="IdPropriji" ColumnName="IdPropriji" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nepromjenjivi">
+            <EntityTypeMapping TypeName="WebKalendarModel.Nepromjenjivi">
+              <MappingFragment StoreEntitySet="Nepromjenjivi">
+                <ScalarProperty Name="IdNepromjenjivi" ColumnName="IdNepromjenjivi" />
+                <ScalarProperty Name="Opis" ColumnName="Opis" />
+                <ScalarProperty Name="VrstaSlavlja" ColumnName="VrstaSlavlja" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Propriji">
+            <EntityTypeMapping TypeName="WebKalendarModel.Propriji">
+              <MappingFragment StoreEntitySet="Propriji">
+                <ScalarProperty Name="IdPropriji" ColumnName="IdPropriji" />
+                <ScalarProperty Name="Opis" ColumnName="Opis" />
+                <ScalarProperty Name="VrstaSlavlja" ColumnName="VrstaSlavlja" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Razina_slavlja">
+            <EntityTypeMapping TypeName="WebKalendarModel.Razina_slavlja">
+              <MappingFragment StoreEntitySet="Razina_slavlja">
+                <ScalarProperty Name="IdRazinaSlavlja" ColumnName="IdRazinaSlavlja" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Opis" ColumnName="Opis" />
+                <ScalarProperty Name="Vrijednost" ColumnName="Vrijednost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tekst">
+            <EntityTypeMapping TypeName="WebKalendarModel.Tekst">
+              <MappingFragment StoreEntitySet="Tekst">
+                <ScalarProperty Name="IdTekst" ColumnName="IdTekst" />
+                <ScalarProperty Name="Referenca" ColumnName="Referenca" />
+                <ScalarProperty Name="Sadrzaj" ColumnName="Sadrzaj" />
+                <ScalarProperty Name="IdJezik" ColumnName="IdJezik" />
+                <ScalarProperty Name="IdVrstaTeksta" ColumnName="IdVrstaTeksta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vrijeme_slavlja">
+            <EntityTypeMapping TypeName="WebKalendarModel.Vrijeme_slavlja">
+              <MappingFragment StoreEntitySet="Vrijeme_slavlja">
+                <ScalarProperty Name="IdVrijemeSlavlja" ColumnName="IdVrijemeSlavlja" />
+                <ScalarProperty Name="Datum" ColumnName="Datum" />
+                <ScalarProperty Name="Opis" ColumnName="Opis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vrsta_slavlja">
+            <EntityTypeMapping TypeName="WebKalendarModel.Vrsta_slavlja">
+              <MappingFragment StoreEntitySet="Vrsta_slavlja">
+                <ScalarProperty Name="IdVrstaSlavlja" ColumnName="IdVrstaSlavlja" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Opis" ColumnName="Opis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vrsta_teksta">
+            <EntityTypeMapping TypeName="WebKalendarModel.Vrsta_teksta">
+              <MappingFragment StoreEntitySet="Vrsta_teksta">
+                <ScalarProperty Name="IdVrstaTeksta" ColumnName="IdVrstaTeksta" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Opis" ColumnName="Opis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Dan_Vrijeme" TypeName="WebKalendarModel.Dan_Vrijeme" StoreEntitySet="Dan_Vrijeme">
+            <EndProperty Name="Dan">
+              <ScalarProperty Name="Datum" ColumnName="Datum" />
+            </EndProperty>
+            <EndProperty Name="Vrijeme_slavlja">
+              <ScalarProperty Name="IdVrijemeSlavlja" ColumnName="IdVrijemeSlavlja" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Tekst_Citanja" TypeName="WebKalendarModel.Tekst_Citanja" StoreEntitySet="Tekst_Citanja">
+            <EndProperty Name="Citanja">
+              <ScalarProperty Name="IdCitanja" ColumnName="IdCitanja" />
+            </EndProperty>
+            <EndProperty Name="Tekst">
+              <ScalarProperty Name="IdTekst" ColumnName="IdTekst" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Tekst_Nepromjenjivi" TypeName="WebKalendarModel.Tekst_Nepromjenjivi" StoreEntitySet="Tekst_Nepromjenjivi">
+            <EndProperty Name="Nepromjenjivi">
+              <ScalarProperty Name="IdNepromjenjivi" ColumnName="IdNepromjenjivi" />
+            </EndProperty>
+            <EndProperty Name="Tekst">
+              <ScalarProperty Name="IdTekst" ColumnName="IdTekst" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Tekst_Propriji" TypeName="WebKalendarModel.Tekst_Propriji" StoreEntitySet="Tekst_Propriji">
+            <EndProperty Name="Propriji">
+              <ScalarProperty Name="IdPropriji" ColumnName="IdPropriji" />
+            </EndProperty>
+            <EndProperty Name="Tekst">
+              <ScalarProperty Name="IdTekst" ColumnName="IdTekst" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

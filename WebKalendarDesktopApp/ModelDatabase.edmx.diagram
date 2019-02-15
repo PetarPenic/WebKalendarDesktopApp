@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="67f5f11725084635aab8cef9490f01bf" Name="Diagram1">
+        <EntityTypeShape EntityType="WebKalendarModel.Citanja" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebKalendarModel.Dan" Width="1.5" PointX="1.5" PointY="22.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebKalendarModel.Jezik" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebKalendarModel.Liturgijska_boja" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebKalendarModel.Misa" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebKalendarModel.Nepromjenjivi" Width="1.5" PointX="0.75" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebKalendarModel.Propriji" Width="1.5" PointX="0.75" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebKalendarModel.Razina_slavlja" Width="1.5" PointX="0.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebKalendarModel.Tekst" Width="1.5" PointX="6" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebKalendarModel.Vrijeme_slavlja" Width="1.5" PointX="0.75" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebKalendarModel.Vrsta_slavlja" Width="1.5" PointX="0.75" PointY="25.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebKalendarModel.Vrsta_teksta" Width="1.5" PointX="3.75" PointY="9.125" IsExpanded="true" />
+        <AssociationConnector Association="WebKalendarModel.FK_Misa_Citanja" ManuallyRouted="false" />
+        <AssociationConnector Association="WebKalendarModel.FK_Tekst_Jezik" ManuallyRouted="false" />
+        <AssociationConnector Association="WebKalendarModel.FK_Misa_Liturgijska_boja" ManuallyRouted="false" />
+        <AssociationConnector Association="WebKalendarModel.FK_Misa_Nepromjenjivi" ManuallyRouted="false" />
+        <AssociationConnector Association="WebKalendarModel.FK_Misa_Propriji" ManuallyRouted="false" />
+        <AssociationConnector Association="WebKalendarModel.FK_Misa_Razina_slavlja" ManuallyRouted="false" />
+        <AssociationConnector Association="WebKalendarModel.FK_Misa_Vrijeme_slavlja" ManuallyRouted="false" />
+        <AssociationConnector Association="WebKalendarModel.FK_Misa_Vrsta_slavlja" ManuallyRouted="false" />
+        <AssociationConnector Association="WebKalendarModel.FK_Tekst_Vrsta_teksta" ManuallyRouted="false" />
+        <AssociationConnector Association="WebKalendarModel.Dan_Vrijeme" ManuallyRouted="false" />
+        <AssociationConnector Association="WebKalendarModel.Tekst_Citanja" ManuallyRouted="false" />
+        <AssociationConnector Association="WebKalendarModel.Tekst_Nepromjenjivi" ManuallyRouted="false" />
+        <AssociationConnector Association="WebKalendarModel.Tekst_Propriji" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
