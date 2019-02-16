@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.Odbc;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,20 +12,20 @@ namespace WebKalendarDesktopApp.UpravljanjeBazom
 {
     class Konekcija
     {
-        private readonly DbConnection connection;
+        private readonly SqlConnection connection;
 
-        public DbConnection GetConnection()
+        public SqlConnection GetConnection()
         {
             return connection;
         }
 
         public Konekcija()
         {
-            var conn = new OdbcConnection();
+            var conn = new SqlConnection();
             conn.ConnectionString =
-                          "Driver={SQL Server};" +
+                          //"Driver={SQL Server};" +
                           "Server=Tassadar;" +
-                          "DataBase=WebKalendar2;" +
+                          "DataBase=WebKalendar;" +
                           "Trusted_Connection=Yes;";
             try
             {
